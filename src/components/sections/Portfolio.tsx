@@ -6,6 +6,7 @@ import {
   type Album,
   type Category,
 } from "../../data/albums";
+import { site } from "../../data/site";
 import ImagePlaceholder from "../ui/ImagePlaceholder";
 import GalleryModal from "../ui/GalleryModal";
 export default function Portfolio() {
@@ -36,6 +37,7 @@ export default function Portfolio() {
           ))}
         </div>
       </div>
+      {site.demoImages && <p className="ai-demo-label">Bộ ảnh AI minh họa · Chưa phải tác phẩm chụp thực tế</p>}
       <div
         className={`portfolio-grid ${filter !== "Tất cả" ? "is-filtered" : ""}`}
       >

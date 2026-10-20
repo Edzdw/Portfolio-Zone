@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Album } from "../../data/albums";
+import { site } from "../../data/site";
 import Modal from "./Modal";
 import ImagePlaceholder from "./ImagePlaceholder";
 export default function GalleryModal({
@@ -33,6 +34,7 @@ export default function GalleryModal({
         alt={photo.alt}
         position={photo.position}
         tone={album.tone}
+        priority
         label={`PHOTO ${String(index + 1).padStart(2, "0")}`}
       />
       <div className="gallery-bottom">
@@ -40,11 +42,13 @@ export default function GalleryModal({
           <span className="eyebrow">{album.category}</span>
           <h3>{album.title}</h3>
           <p>{photo.alt}</p>
+          {site.demoImages && <p>Ảnh AI minh họa</p>}
         </div>
         <div className="gallery-controls">
           <button
             className="icon-button"
             aria-label="Ảnh trước"
+            disabled={count < 2}
             onClick={() => setIndex((i) => (i - 1 + count) % count)}
           >
             <ChevronLeft />
@@ -55,6 +59,7 @@ export default function GalleryModal({
           <button
             className="icon-button"
             aria-label="Ảnh tiếp theo"
+            disabled={count < 2}
             onClick={() => setIndex((i) => (i + 1) % count)}
           >
             <ChevronRight />

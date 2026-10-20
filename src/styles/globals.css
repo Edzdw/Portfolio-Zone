@@ -1515,3 +1515,17 @@ h3 {
     animation: none !important;
   }
 }
+
+/* AI demo images: preserve faces in both cards and the full-image viewer. */
+.service-image img { object-position: 50% 30%; }
+.album-card img { object-position: 50% 28%; }
+.hero-note { text-shadow: 0 2px 12px #163457aa; }
+.gallery-modal > .photo { background: #1c2330; }
+.gallery-modal > .photo img { object-fit: contain; }
+.ai-demo-label { font-size: 9px; color: var(--muted); margin: -5px 0 14px; }
+.icon-button:disabled { opacity: .35; cursor: default; }
+@media (max-width: 760px) {
+  .hero-art { opacity: 1; }
+  .hero-note { display: none; }
+  .hero:after { background: linear-gradient(90deg, #f4f7f9f2, #f4f7f9b5 38%, #f4f7f925 90%); }
+}

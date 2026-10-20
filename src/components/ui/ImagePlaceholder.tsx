@@ -7,6 +7,9 @@ type Props = {
   className?: string;
   position?: string;
   label?: string;
+  priority?: boolean;
+  srcSet?: string;
+  sizes?: string;
 };
 export default function ImagePlaceholder({
   src,
@@ -15,6 +18,9 @@ export default function ImagePlaceholder({
   className = "",
   position = "center",
   label = "YOUR PHOTO HERE",
+  priority = false,
+  srcSet,
+  sizes,
 }: Props) {
   const [failed, setFailed] = useState(false);
   return (
@@ -23,7 +29,11 @@ export default function ImagePlaceholder({
         <img
           src={src}
           alt={alt}
-          loading="lazy"
+          loading={priority ? "eager" : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
+          decoding="async"
+          srcSet={srcSet}
+          sizes={sizes}
           style={{ objectPosition: position }}
           onError={() => setFailed(true)}
         />

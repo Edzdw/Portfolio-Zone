@@ -45,3 +45,7 @@ images: [
 Album hỗ trợ phím mũi tên, Escape đóng, click nền đóng và giữ focus trong hộp thoại native. Website có menu mobile, skip link, focus bàn phím và hỗ trợ reduced motion. Google Fonts có font dự phòng nếu không có mạng.
 
 Chưa có backend, CMS hoặc chức năng gửi form. Đặt lịch qua URL mạng xã hội do chủ website cấu hình. Chưa triển khai lên hosting.
+
+## Bộ ảnh AI đã gắn
+
+Hero, hai dịch vụ và bảy album đã dùng bộ ảnh AI demo. Nguồn và prompt set ghi trong `docs/ai-images.md`. Mỗi album hiện có một ảnh; thêm ảnh thật vào `src/data/albums.ts` để mở rộng bộ ảnh. Ảnh photographer vẫn giữ khung chờ ảnh thật. Thay toàn bộ ảnh demo rồi đổi `site.demoImages` thành `false` để bỏ nhãn AI.

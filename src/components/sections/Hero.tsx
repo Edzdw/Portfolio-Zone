@@ -6,7 +6,12 @@ export default function Hero() {
     <section className="hero" id="home">
       <div className="hero-art">
         <ImagePlaceholder
-          alt="Ảnh cosplay chủ đạo"
+          src="/images/hero/ai-moonlight.jpg"
+          srcSet="/images/hero/ai-moonlight-960.jpg 960w, /images/hero/ai-moonlight.jpg 1672w"
+          sizes="(max-width: 760px) 100vw, 77vw"
+          priority
+          position="65% 40%"
+          alt="Ảnh AI minh họa: cosplayer tóc bạc với dù xanh trong nhà kính"
           tone="blue"
           label="HERO / YOUR FAVORITE WORLD"
         />

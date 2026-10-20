@@ -18,16 +18,12 @@ export type Album = {
 export const albums: Album[] = [
   {
     id: "moonlight",
-    title: "A little moonlight",
+    title: "A little blue magic",
     category: "Fes Cosplay",
-    character: "Thế giới dưới ánh trăng",
+    character: "Giấc mơ trong nhà kính",
     tone: "blue",
     featured: true,
-    images: [
-      { src: "", alt: "Cosplay dưới ánh trăng — ảnh 01" },
-      { src: "", alt: "Chi tiết trang phục — ảnh 02" },
-      { src: "", alt: "Chân dung nhân vật — ảnh 03" },
-    ],
+    images: [{ src: "/images/hero/ai-moonlight.jpg", alt: "Ảnh AI: cosplay tóc bạc, dù xanh trong nhà kính", position: "65% 35%" }],
   },
   {
     id: "afternoon",
@@ -35,10 +31,7 @@ export const albums: Album[] = [
     category: "Studio Daily",
     character: "Portrait / Natural light",
     tone: "peach",
-    images: [
-      { src: "", alt: "Chân dung trong nắng chiều" },
-      { src: "", alt: "Khoảnh khắc bên cửa sổ" },
-    ],
+    images: [{ src: "/images/services/ai-studio.jpg", alt: "Ảnh AI: chân dung studio bên cửa sổ", position: "50% 30%" }],
   },
   {
     id: "sakura",
@@ -46,10 +39,7 @@ export const albums: Album[] = [
     category: "Fes Cosplay",
     character: "Một giấc mơ màu hồng",
     tone: "rose",
-    images: [
-      { src: "", alt: "Cosplay giữa mùa hoa" },
-      { src: "", alt: "Chi tiết phụ kiện nhân vật" },
-    ],
+    images: [{ src: "/images/services/ai-sakura.jpg", alt: "Ảnh AI: cosplay kimono hồng giữa hoa anh đào", position: "50% 28%" }],
   },
   {
     id: "golden",
@@ -57,10 +47,7 @@ export const albums: Album[] = [
     category: "Anime / Game",
     character: "Your favorite character",
     tone: "gold",
-    images: [
-      { src: "", alt: "Nhân vật trong ánh hoàng hôn" },
-      { src: "", alt: "Chân dung ánh sáng vàng" },
-    ],
+    images: [{ src: "/images/portfolio/ai-golden.jpg", alt: "Ảnh AI: cosplay navy và vàng trong nắng chiều", position: "50% 28%" }],
   },
   {
     id: "slow",
@@ -68,10 +55,7 @@ export const albums: Album[] = [
     category: "Studio Daily",
     character: "Những điều thật bình yên",
     tone: "cream",
-    images: [
-      { src: "", alt: "Buổi sáng cuối tuần" },
-      { src: "", alt: "Chân dung tự nhiên" },
-    ],
+    images: [{ src: "/images/portfolio/ai-slow.jpg", alt: "Ảnh AI: chân dung tự nhiên bên cửa sổ buổi sáng", position: "50% 28%" }],
   },
   {
     id: "winter",
@@ -79,10 +63,7 @@ export const albums: Album[] = [
     category: "Anime / Game",
     character: "A story in blue",
     tone: "ice",
-    images: [
-      { src: "", alt: "Concept mùa đông" },
-      { src: "", alt: "Chi tiết concept mùa đông" },
-    ],
+    images: [{ src: "/images/portfolio/ai-winter.jpg", alt: "Ảnh AI: cosplay tóc xanh bên kính mùa đông", position: "50% 28%" }],
   },
   {
     id: "neon",
@@ -90,9 +71,6 @@ export const albums: Album[] = [
     category: "Fes Cosplay",
     character: "City lights / Night portrait",
     tone: "night",
-    images: [
-      { src: "", alt: "Chân dung đêm lễ hội" },
-      { src: "", alt: "Ánh đèn thành phố" },
-    ],
+    images: [{ src: "/images/portfolio/ai-neon.jpg", alt: "Ảnh AI: cosplay đỏ đen trên phố đêm", position: "50% 28%" }],
   },
 ];
