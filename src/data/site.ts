@@ -1,6 +1,6 @@
 export const site = {
   // Đổi thành false sau khi thay hết ảnh AI bằng ảnh thật.
-  demoImages: true,
+  demoImages: false,
   name: "Shutter&Magic",
   photographer: "Shutter",
   description:

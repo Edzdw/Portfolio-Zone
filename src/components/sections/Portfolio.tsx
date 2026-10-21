@@ -37,7 +37,11 @@ export default function Portfolio() {
           ))}
         </div>
       </div>
-      {site.demoImages && <p className="ai-demo-label">Bộ ảnh AI minh họa · Chưa phải tác phẩm chụp thực tế</p>}
+      {site.demoImages && (
+        <p className="ai-demo-label">
+          Bộ ảnh AI minh họa · Chưa phải tác phẩm chụp thực tế
+        </p>
+      )}
       <div
         className={`portfolio-grid ${filter !== "Tất cả" ? "is-filtered" : ""}`}
       >
@@ -49,7 +53,15 @@ export default function Portfolio() {
             aria-label={`Xem album ${album.title}`}
           >
             <ImagePlaceholder
-              src={album.images[0].src}
+              src={album.images[0].thumbnail ?? album.images[0].src}
+              srcSet={album.images[0].srcSet}
+              sizes={
+                album.featured
+                  ? "(max-width: 760px) 100vw, 50vw"
+                  : "(max-width: 760px) 50vw, 25vw"
+              }
+              width={album.images[0].width}
+              height={album.images[0].height}
               alt={album.images[0].alt}
               position={album.images[0].position}
               tone={album.tone}

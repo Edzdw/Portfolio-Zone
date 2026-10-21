@@ -11,7 +11,7 @@ export const services = [
     ],
     note: "Natural\nSoft\nYou ♡",
     tone: "peach",
-    image: "/images/services/ai-studio.jpg",
+    image: "/images/real/studio/studio-6-640.jpg",
     detail:
       "Một buổi chụp dành riêng cho bạn, từ chân dung đời thường đến concept cá nhân. Mình sẽ trao đổi moodboard, trang phục và địa điểm trước buổi chụp. Thời lượng, số ảnh chỉnh sửa và chi phí được thống nhất khi tư vấn.",
   },
@@ -27,7 +27,26 @@ export const services = [
     ],
     note: "Your character,\nmy lens ✧",
     tone: "rose",
-    image: "/images/services/ai-sakura.jpg",
+    image:
+      "/images/real/cosplay/cosplay-23.jpg",
+    detail:
+      "Lưu giữ nhân vật bạn yêu tại lễ hội hoặc trong một concept riêng. Mình cùng bạn trao đổi góc chụp, pose và tinh thần nhân vật. Địa điểm, lịch fes, số ảnh và chi phí sẽ được xác nhận khi đặt lịch.",
+  },
+  
+  {
+    id: "Gundam",
+    title: " Figure",
+    subtitle: "Đừng quên những điều nhỏ nhặt nhất",
+    description: "Chụp sản phẩm, figure",
+    points: [
+      "Chụp tại studio / ngoại cảnh",
+      "Chỉnh màu tự nhiên, tinh tế",
+      "Model Posing & Product Styling",
+    ],
+    note: "Some Tiny Things",
+    tone: "black",
+    image:
+      "/images/real/gundam/gundam-7-640.jpg",
     detail:
       "Lưu giữ nhân vật bạn yêu tại lễ hội hoặc trong một concept riêng. Mình cùng bạn trao đổi góc chụp, pose và tinh thần nhân vật. Địa điểm, lịch fes, số ảnh và chi phí sẽ được xác nhận khi đặt lịch.",
   },

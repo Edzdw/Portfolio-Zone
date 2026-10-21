@@ -1,20 +1,71 @@
-import { ArrowDownRight, Play } from "lucide-react";
+import { type CSSProperties } from "react";
+import useHeroSlideshow from "../../hooks/useHeroSlideshow";
+import { heroPhotos } from "../../data/hero";
+import { ArrowDownRight, Play, Pause } from "lucide-react";
 import ImagePlaceholder from "../ui/ImagePlaceholder";
 import Button from "../ui/Button";
 export default function Hero() {
+  const {
+    heroRef,
+    frame,
+    enabled,
+    playing,
+    markReady,
+    toggle,
+    setHovered,
+    setFocused,
+  } = useHeroSlideshow(heroPhotos.length);
+  const photo = heroPhotos[frame.current];
   return (
-    <section className="hero" id="home">
-      <div className="hero-art">
-        <ImagePlaceholder
-          src="/images/hero/ai-moonlight.jpg"
-          srcSet="/images/hero/ai-moonlight-960.jpg 960w, /images/hero/ai-moonlight.jpg 1672w"
-          sizes="(max-width: 760px) 100vw, 77vw"
-          priority
-          position="65% 40%"
-          alt="Ảnh AI minh họa: cosplayer tóc bạc với dù xanh trong nhà kính"
-          tone="blue"
-          label="HERO / YOUR FAVORITE WORLD"
-        />
+    <section
+      ref={heroRef}
+      className="hero"
+      data-playing={playing}
+      onFocusCapture={() => setFocused(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null))
+          setFocused(false);
+      }}
+      id="home"
+      style={
+        {
+          "--hero-mobile-position": photo.mobilePosition,
+          "--hero-quote-color": photo.quoteColor,
+        } as CSSProperties
+      }
+    >
+      <div
+        className="hero-art"
+        role="group"
+        aria-label="Ảnh cosplay nổi bật"
+        aria-roledescription="trình chiếu"
+        aria-live="off"
+      >
+        {heroPhotos.map((item, index) => (
+          <div
+            key={item.src}
+            className={`hero-slide ${index === frame.current ? "is-active" : index === frame.previous ? "is-previous" : ""}`}
+            aria-hidden={index !== frame.current}
+            style={
+              { "--hero-mobile-position": item.mobilePosition } as CSSProperties
+            }
+          >
+            <ImagePlaceholder
+              src={item.src}
+              srcSet={item.srcSet}
+              sizes="(max-width: 760px) 100vw, 77vw"
+              width={item.width}
+              height={item.height}
+              priority={index === 0}
+              eager
+              onLoad={() => markReady(index)}
+              position={item.position}
+              alt={item.alt}
+              tone="blue"
+              label="COSPLAY PHOTOGRAPHY"
+            />
+          </div>
+        ))}
       </div>
       <div className="container hero-content">
         <p className="eyebrow">
@@ -57,8 +108,34 @@ export default function Hero() {
         <span>SCROLL TO EXPLORE</span>
         <ArrowDownRight size={20} />
       </a>
-      <div className="hero-number">
-        01 <span /> 03
+      <div
+        className="hero-playback"
+        onPointerEnter={(event) => {
+          if (event.pointerType === "mouse") setHovered(true);
+        }}
+        onPointerLeave={() => setHovered(false)}
+      >
+        <button
+          className="hero-playback-toggle"
+          onClick={toggle}
+          aria-label={enabled ? "Tạm dừng trình chiếu" : "Phát trình chiếu"}
+        >
+          {enabled ? (
+            <Pause size={13} aria-hidden="true" />
+          ) : (
+            <Play size={13} aria-hidden="true" />
+          )}
+        </button>
+        <div className="hero-slide-indicators" aria-hidden="true">
+          {heroPhotos.map((item, index) => (
+            <span
+              key={item.src}
+              className={frame.current === index ? "is-active" : ""}
+            >
+              <i />
+            </span>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -1,51 +1,40 @@
 # Shutter & Magic
 
-Website portfolio nhiếp ảnh — React + TypeScript + Vite. Bản đầu chạy local, ảnh và đánh giá là nội dung minh họa.
+Portfolio nhiếp ảnh bằng React + TypeScript + Vite, chạy local. Đã thay bộ ảnh AI đang hiển thị bằng 68 ảnh thật từ Drive của chủ website.
 
-## Chạy
+## Chạy và kiểm tra
 
 ```sh
 npm install
 npm run dev
+npm run build
 ```
 
-Mở địa chỉ Vite hiển thị. `npm run build` kiểm tra TypeScript và đóng gói vào `dist/`. `npm run preview` xem bản build.
+`npm run build` kiểm tra TypeScript và đóng gói vào `dist/`. `npm run preview` xem bản build. Không cần truy cập Drive khi khách xem web: ảnh được phục vụ từ project.
 
-## Thay nội dung
+## Nội dung và ảnh
 
-- `src/data/site.ts`: tên thương hiệu, giới thiệu, địa điểm, thiết bị, URL Facebook / Instagram. Để trống URL sẽ hiện thông báo chưa cấu hình, không dẫn đến tài khoản giả.
-- `src/data/services.ts`: dịch vụ, điểm nổi bật, nội dung chi tiết và ảnh.
-- `src/data/albums.ts`: album, thể loại, ảnh, mô tả ảnh, vị trí crop (`position`, ví dụ `50% 30%`). Bộ lọc và số ảnh lấy từ dữ liệu.
-- `src/data/testimonials.ts`: thay đánh giá minh họa bằng phản hồi có thật. Khi đã thay, bỏ nhãn minh họa trong `Testimonials.tsx`.
-- `src/styles/tokens.css`: màu, font, chiều rộng nội dung.
+- `src/data/site.ts`: thương hiệu, giới thiệu, thiết bị, địa điểm và URL Facebook / Instagram. `demoImages: false` vì các ảnh đang hiển thị đã dùng bộ ảnh thật.
+- `src/data/hero.ts`: ba ảnh trong thư mục **3 Ảnh chính** trên Drive, thứ tự hiện tại là `IMG_9548.JPG`, `IMG_9663.JPG`, `0D1D7839-72E7-47C3-A427-31B58E19BE4C.jpeg`. Ảnh tự đổi mỗi 7 giây bằng crossfade 1,4 giây; dấu nhỏ báo ảnh hiện tại và nút dừng/phát thay cho các nút số. Trình chiếu tạm dừng khi hero ngoài màn hình, tab bị ẩn, người dùng focus vào hero hoặc rê chuột vào cụm điều khiển. Khi bật giảm chuyển động, trình chiếu không tự chạy; có thể chủ động bấm phát. `position` và `mobilePosition` điều chỉnh vị trí ảnh cho từng cỡ màn hình.
+- `src/data/services.ts`: nội dung và ảnh hai dịch vụ Studio Daily / Fes Cosplay.
+- `src/data/albums.ts`: 7 bộ ảnh với bộ lọc **Tất cả / Cosplay / Studio / Gundam**. Các ảnh Cosplay được chia thành tuyển tập để duyệt, chưa khẳng định là cùng một buổi chụp. Đổi tên và nhóm lại theo tên nhân vật/buổi chụp nếu muốn.
+- `src/data/testimonials.ts`: vẫn là đánh giá minh họa, cần thay bằng phản hồi có thật trước khi công khai.
+- `src/styles/tokens.css`: màu sắc, font và chiều rộng nội dung.
 
-## Thay ảnh
+## Thư mục ảnh thật
 
-Chép ảnh vào `public/images/` theo nhóm. Đường dẫn trong dữ liệu bắt đầu bằng `/images/`, ví dụ:
+`public/images/real/hero`, `cosplay`, `studio`, `gundam` chứa 68 ảnh và bản 640px tương ứng. Hero tối đa 2200px; album tối đa 1600px. Các bản JPEG đã nén, sửa hướng theo EXIF và không đưa metadata gốc vào bản web. Ảnh trên Drive giữ nguyên.
 
-```ts
-images: [
-  {
-    src: "/images/portfolio/moonlight-01.webp",
-    alt: "Mô tả ảnh",
-    position: "50% 30%",
-  },
-  { src: "/images/portfolio/moonlight-02.webp", alt: "Mô tả ảnh thứ hai" },
-];
-```
+`docs/real-images.json` ghi file gốc, Drive ID/URL, kích thước và đường dẫn local để đối chiếu. Không chứa token hoặc đường dẫn tải có thời hạn. Web không tự đồng bộ khi Drive thay đổi.
 
-`src` trống hoặc ảnh không tải được sẽ hiện khung mockup. Nên dùng WebP/AVIF/JPEG đã nén, khoảng 1600–2400px cho hero và 1000–1600px cho album; giữ bản gốc ở nơi khác.
+Bấm vào một bộ ảnh để xem gallery, chuyển bằng nút hoặc phím mũi tên, Escape để đóng. Gallery giữ nguyên tỉ lệ ảnh, còn ảnh bìa dùng crop. Thumbnail và `srcSet` giúp trang đầu tải nhẹ; ảnh lớn chỉ được tải khi xem album, kèm tải trước một ảnh kế tiếp.
 
-Ảnh hero: thêm `src="/images/hero/cover.webp"` vào `ImagePlaceholder` trong `src/components/sections/Hero.tsx`. Ảnh photographer: tương tự tại `About.tsx`. Ảnh dịch vụ: chỉnh trường `image` trong `services.ts`.
+Ảnh giới thiệu photographer vẫn là khung chờ ảnh thật, không lấy chân dung khách hàng để thay thế. Bộ ảnh AI cũ được giữ trong các thư mục cũ làm bản dự phòng, nhưng không còn được dùng trong hero, dịch vụ hoặc portfolio.
 
 ## Bố cục
 
-`components/layout`: header / footer. `components/sections`: các phần trang. `components/ui`: nút, khung ảnh, hộp thoại và gallery. `data`: nội dung. `styles`: thiết kế và responsive.
+`components/layout`: header/footer. `components/sections`: các phần trang. `components/ui`: nút, ảnh, dialog/gallery. `data`: nội dung. `styles`: giao diện và responsive.
 
-Album hỗ trợ phím mũi tên, Escape đóng, click nền đóng và giữ focus trong hộp thoại native. Website có menu mobile, skip link, focus bàn phím và hỗ trợ reduced motion. Google Fonts có font dự phòng nếu không có mạng.
+Chưa có CMS, backend hoặc chức năng gửi form. Đặt lịch qua URL mạng xã hội do chủ website cấu hình. Website chưa được triển khai lên hosting.
 
-Chưa có backend, CMS hoặc chức năng gửi form. Đặt lịch qua URL mạng xã hội do chủ website cấu hình. Chưa triển khai lên hosting.
-
-## Bộ ảnh AI đã gắn
-
-Hero, hai dịch vụ và bảy album đã dùng bộ ảnh AI demo. Nguồn và prompt set ghi trong `docs/ai-images.md`. Mỗi album hiện có một ảnh; thêm ảnh thật vào `src/data/albums.ts` để mở rộng bộ ảnh. Ảnh photographer vẫn giữ khung chờ ảnh thật. Thay toàn bộ ảnh demo rồi đổi `site.demoImages` thành `false` để bỏ nhãn AI.
+Ảnh thật dùng tên ngắn theo nhóm: `cosplay-1.jpg`, `gundam-1.jpg`, `hero-1.jpg`, `studio-1.jpg`; bản nhỏ thêm `-640`. Thứ tự hiển thị do các mảng dữ liệu quyết định, không theo số trong tên file. Bảng đối chiếu tên cũ/mới nằm trong `docs/image-renames.json`.

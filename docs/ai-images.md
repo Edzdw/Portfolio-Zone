@@ -1,3 +1,5 @@
+> Lưu trữ: bộ AI này đã được thay bằng ảnh thật từ Drive. Xem `real-images.md` để biết trạng thái hiện tại.
+
 # Bộ ảnh AI minh họa
 
 Tạo bằng công cụ imagegen tích hợp trong Codex, không dùng CLI/API key riêng. Đây là bộ ảnh demo để duyệt giao diện; không phải tác phẩm nhiếp ảnh thực tế. Ảnh giới thiệu photographer chưa thay.

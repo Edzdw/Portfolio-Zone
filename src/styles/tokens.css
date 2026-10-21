@@ -1,13 +1,16 @@
-@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Shadows+Into+Light&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Alex+Brush&display=swap");
+
 :root {
   --paper: #fbf9f5;
   --ink: #202638;
   --muted: #7b7d88;
   --pink: #d32177;
   --line: #e8e3df;
+
   --serif: "Cormorant Garamond", Georgia, serif;
   --sans: "Be Vietnam Pro", sans-serif;
-  --script: "Shadows Into Light", cursive;
+  --script: "Alex Brush", cursive;
+
   --max: 1220px;
   --radius: 9px;
 }

@@ -21,6 +21,11 @@ export default function GalleryModal({
     window.addEventListener("keydown", key);
     return () => window.removeEventListener("keydown", key);
   }, [count]);
+  useEffect(() => {
+    if (count < 2) return;
+    const next = new Image();
+    next.src = album.images[(index + 1) % count].src;
+  }, [album, index, count]);
   const photo = album.images[index];
   return (
     <Modal
@@ -31,6 +36,8 @@ export default function GalleryModal({
       <ImagePlaceholder
         key={`${album.id}-${index}`}
         src={photo.src}
+        width={photo.width}
+        height={photo.height}
         alt={photo.alt}
         position={photo.position}
         tone={album.tone}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Instagram, Menu, X, ArrowUpRight } from "lucide-react";
 import { site } from "../../data/site";
 export const links = [
@@ -25,8 +25,54 @@ export function Brand() {
 }
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const header = headerRef.current;
+    const hero = document.getElementById("home");
+    if (!header || !hero) return;
+
+    let observer: IntersectionObserver | undefined;
+    const watchHero = () => {
+      observer?.disconnect();
+      const edge = Math.ceil(header.getBoundingClientRect().bottom);
+      // Read immediately for restored scroll positions and direct section links.
+      setPastHero(hero.getBoundingClientRect().bottom <= edge);
+      if (!("IntersectionObserver" in window)) return;
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry) return;
+          setPastHero(
+            !entry.isIntersecting && entry.boundingClientRect.bottom <= edge,
+          );
+        },
+        { rootMargin: `-${edge}px 0px 0px 0px`, threshold: 0 },
+      );
+      observer.observe(hero);
+    };
+
+    watchHero();
+    // Re-measure the edge when the header switches between mobile and desktop.
+    const resizeObserver =
+      typeof ResizeObserver !== "undefined"
+        ? new ResizeObserver(watchHero)
+        : undefined;
+    resizeObserver?.observe(header);
+    window.addEventListener("resize", watchHero);
+    return () => {
+      observer?.disconnect();
+      resizeObserver?.disconnect();
+      window.removeEventListener("resize", watchHero);
+    };
+  }, []);
   return (
-    <header className="header">
+    <header
+      ref={headerRef}
+      className="header"
+      data-surface={pastHero ? "glass" : "hero"}
+      data-menu-open={open}
+    >
       <div className="header-inner">
         <Brand />
         <nav
