@@ -6,11 +6,13 @@ export default function Modal({
   onClose,
   label,
   className = "",
+  closeDisabled = false,
 }: {
   children: ReactNode;
   onClose: () => void;
   label: string;
   className?: string;
+  closeDisabled?: boolean;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
   useEffect(() => {
@@ -42,6 +44,7 @@ export default function Modal({
         className="icon-button modal-close"
         onClick={onClose}
         aria-label="Đóng"
+        disabled={closeDisabled}
       >
         <X />
       </button>

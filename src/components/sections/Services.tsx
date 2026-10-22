@@ -1,10 +1,11 @@
+import { useBooking } from "../booking/BookingProvider";
 import { useState } from "react";
 import { Camera, Sparkles, Check, ArrowUpRight } from "lucide-react";
 import { services, type Service } from "../../data/services";
 import ImagePlaceholder from "../ui/ImagePlaceholder";
 import Modal from "../ui/Modal";
-import Button from "../ui/Button";
 export default function Services() {
+  const { openBooking } = useBooking();
   const [selected, setSelected] = useState<Service | null>(null);
   return (
     <section className="section container" id="services">
@@ -70,9 +71,23 @@ export default function Services() {
             <h2>{selected.title}</h2>
             <p className="handwritten">{selected.subtitle}</p>
             <p>{selected.detail}</p>
-            <div onClick={() => setSelected(null)}>
-              <Button>Liên hệ tư vấn</Button>
-            </div>
+            <button
+              type="button"
+              className="button"
+              onClick={() => {
+                const id = selected.id.toLowerCase();
+                setSelected(null);
+                openBooking(
+                  id === "studio"
+                    ? "Studio"
+                    : id === "cosplay"
+                      ? "Cosplay"
+                      : "Figure",
+                );
+              }}
+            >
+              Gửi yêu cầu chụp <ArrowUpRight size={15} />
+            </button>
           </div>
         </Modal>
       )}

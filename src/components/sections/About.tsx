@@ -38,7 +38,11 @@ export default function About() {
         </div>
         <div className="about-polaroid">
           <ImagePlaceholder
-            alt="Chân dung photographer"
+            src={site.portrait.src}
+            alt={site.portrait.alt}
+            position={site.portrait.position}
+            width={site.portrait.width}
+            height={site.portrait.height}
             tone="sage"
             label="YOUR PORTRAIT"
           />

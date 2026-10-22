@@ -35,6 +35,24 @@ Bấm vào một bộ ảnh để xem gallery, chuyển bằng nút hoặc phím
 
 `components/layout`: header/footer. `components/sections`: các phần trang. `components/ui`: nút, ảnh, dialog/gallery. `data`: nội dung. `styles`: giao diện và responsive.
 
-Chưa có CMS, backend hoặc chức năng gửi form. Đặt lịch qua URL mạng xã hội do chủ website cấu hình. Website chưa được triển khai lên hosting.
+Chưa có CMS hoặc backend riêng. Popup đặt lịch gửi yêu cầu trực tiếp đến Formspree; các kênh Facebook / Instagram vẫn hoạt động để trao đổi. Website chưa được triển khai lên hosting.
 
 Ảnh thật dùng tên ngắn theo nhóm: `cosplay-1.jpg`, `gundam-1.jpg`, `hero-1.jpg`, `studio-1.jpg`; bản nhỏ thêm `-640`. Thứ tự hiển thị do các mảng dữ liệu quyết định, không theo số trong tên file. Bảng đối chiếu tên cũ/mới nằm trong `docs/image-renames.json`.
+
+
+## Popup gửi yêu cầu chụp
+
+Các nút đặt lịch mở cùng một popup tự thiết kế. Endpoint công khai ở `src/lib/booking.ts`: `https://formspree.io/f/xaeqrzwk`. Không có API key hay token gửi email trong frontend.
+
+Nickname, số điện thoại và dịch vụ là bắt buộc. Chọn Cosplay thì cần thêm nhân vật. Ngày dự kiến, địa điểm/tên fes và ghi chú là tùy chọn. Nút trong chi tiết dịch vụ chọn sẵn loại dịch vụ tương ứng.
+
+Popup giữ bản nháp trong bộ nhớ khi đóng/mở lại và khi gửi lỗi, không lưu dữ liệu khách vào localStorage. Tải lại trang sẽ mất bản nháp. Đang gửi thì khóa nút và tạm chặn đóng popup để giữ trạng thái; hết 25 giây sẽ hiện thông báo chưa xác nhận được kết quả. Không tự gửi lại. Thành công chỉ sau phản hồi xác nhận từ Formspree; không tự chốt lịch hoặc kiểm tra lịch trống.
+
+Email nhận, xác minh email và tích hợp Discord / Telegram cần cấu hình trong dashboard Formspree. Đợt triển khai này kiểm tra bằng yêu cầu mô phỏng, chưa gửi thử thật hoặc xác minh email đến. Sau khi cấu hình, có thể gửi một yêu cầu thử từ web để kiểm tra thông báo.
+
+
+## Zalo QR
+
+Nút Zalo nổi góc dưới bên phải và nút Zalo trong Liên hệ cùng mở popup. QR được lấy riêng từ ảnh danh thiếp, giữ nguyên pixel và khoảng trắng quanh mã, lưu PNG tại `public/images/real/contact/zalo-qr.png`. Có thể lưu mã bằng nút tải trong popup. Không dùng lại ảnh đại diện hoặc nền danh thiếp.
+
+Cấu hình ở `site.zalo` trong `src/data/site.ts`: `qrImage` là ảnh QR; `profileUrl` để trống khi chưa xác nhận được đường dẫn Zalo. Khi có URL đúng, điền vào để hiện nút Mở Zalo. Không suy đoán số điện thoại hay URL tài khoản từ tên trong danh thiếp.

@@ -1,3 +1,5 @@
+import ZaloContactProvider from "./components/contact/ZaloContact";
+import BookingProvider from "./components/booking/BookingProvider";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Hero from "./components/sections/Hero";
@@ -8,20 +10,22 @@ import Testimonials from "./components/sections/Testimonials";
 import Contact from "./components/sections/Contact";
 export default function App() {
   return (
-    <>
-      <a className="skip-link" href="#main">
-        Đến nội dung chính
-      </a>
-      <Header />
-      <main id="main">
-        <Hero />
-        <Services />
-        <Portfolio />
-        <About />
-        <Testimonials />
-        <Contact />
-      </main>
-      <Footer />
-    </>
+    <ZaloContactProvider>
+      <BookingProvider>
+        <a className="skip-link" href="#main">
+          Đến nội dung chính
+        </a>
+        <Header />
+        <main id="main">
+          <Hero />
+          <Services />
+          <Portfolio />
+          <About />
+          {/* <Testimonials /> */}
+          <Contact />
+        </main>
+        <Footer />
+      </BookingProvider>
+    </ZaloContactProvider>
   );
 }

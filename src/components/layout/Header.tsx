@@ -1,3 +1,4 @@
+import { useBooking } from "../booking/BookingProvider";
 import { useEffect, useRef, useState } from "react";
 import { Instagram, Menu, X, ArrowUpRight } from "lucide-react";
 import { site } from "../../data/site";
@@ -24,6 +25,7 @@ export function Brand() {
   );
 }
 export default function Header() {
+  const { openBooking } = useBooking();
   const [open, setOpen] = useState(false);
   const [pastHero, setPastHero] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
@@ -94,9 +96,16 @@ export default function Header() {
           >
             <Instagram size={18} />
           </a>
-          <a href="#contact" className="button button--small">
+          <button
+            type="button"
+            className="button button--small"
+            onClick={() => {
+              setOpen(false);
+              openBooking();
+            }}
+          >
             Đặt lịch chụp <ArrowUpRight size={14} />
-          </a>
+          </button>
           <button
             className="menu-toggle icon-button"
             onClick={() => setOpen((v) => !v)}

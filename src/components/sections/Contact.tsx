@@ -1,7 +1,11 @@
+import { useZaloContact } from "../contact/ZaloContact";
+import { useBooking } from "../booking/BookingProvider";
 import { useState } from "react";
 import { Facebook, Instagram, ArrowUpRight } from "lucide-react";
 import { site } from "../../data/site";
 export default function Contact() {
+  const openZalo = useZaloContact();
+  const { openBooking } = useBooking();
   const [notice, setNotice] = useState("");
   return (
     <section className="contact" id="contact">
@@ -19,6 +23,20 @@ export default function Contact() {
           </p>
         </div>
         <div className="contact-buttons">
+          <button
+            type="button"
+            className="button contact-zalo"
+            onClick={openZalo}
+          >
+            Zalo <ArrowUpRight size={14} />
+          </button>
+          <button
+            type="button"
+            className="button"
+            onClick={() => openBooking()}
+          >
+            Gửi yêu cầu chụp <ArrowUpRight size={14} />
+          </button>
           {[
             { name: "Facebook", url: site.facebook, Icon: Facebook },
             { name: "Instagram", url: site.instagram, Icon: Instagram },
